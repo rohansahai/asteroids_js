@@ -7,6 +7,7 @@
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
+    this.bullets = [];
   }
 
   Game.DIM_X = 500;
@@ -27,6 +28,10 @@
       this.asteroids[i].draw(this.ctx);
     }
     this.ship.draw(this.ctx);
+
+    for (var i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].draw(this.ctx);
+    }
   };
 
   Game.prototype.move = function() {
@@ -34,6 +39,10 @@
       this.asteroids[i].move();
     }
     this.ship.move();
+
+    for (var i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].move();
+    }
   };
 
   Game.prototype.step = function() {
@@ -80,6 +89,11 @@
     key('j', function(){ that.ship.power([-1,0]) });
     key('k', function(){ that.ship.power([0,1]) });
     key('l', function(){ that.ship.power([1,0]) });
+    key('space', function(){ that.fireBullet() });
+  };
+
+  Game.prototype.fireBullet = function() {
+    this.bullets.push(this.ship.fireBullet() );
   };
 
 })(this);
