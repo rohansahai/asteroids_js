@@ -20,7 +20,7 @@
   };
 
   MovingObject.prototype.draw = function(ctx) {
-    ctx.fillStyle = "black";
+    ctx.fillStyle = this.color;
     ctx.beginPath();
 
     ctx.arc(
@@ -36,8 +36,8 @@
   };
 
   MovingObject.prototype.isCollidedWith = function(otherObject) {
-    var dx = Math.pow((this.pos[0] - otherObject[0]), 2);
-    var dy = Math.pow((this.pos[1] - otherObject[1]), 2);
+    var dx = Math.pow((this.pos[0] - otherObject.pos[0]), 2);
+    var dy = Math.pow((this.pos[1] - otherObject.pos[1]), 2);
     var dist = Math.sqrt(dx + dy);
 
     if (this.radius + otherObject.radius >= dist){
@@ -46,3 +46,4 @@
     return false;
   };
 })(this);
+
