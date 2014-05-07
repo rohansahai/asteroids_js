@@ -22,17 +22,16 @@ function myObject(name) {
   this.name = name;
 };
 
-myObject.prototype.mySum = function() {
+var mySum = function() {
   console.log(this.name);
   var sum = 0;
   for(var i = 0; i < arguments.length; i++) {
     sum += arguments[i];
   }
   console.log(sum);
-  return sum;
 };
 
 var bob = new myObject("bob");
 //bob.mySum(1, 2);
-var myBoundFunction = bob.mySum.myBind(bob, 1, 2);
+var myBoundFunction = mySum.myBind(bob, 1, 2);
 myBoundFunction(3);
