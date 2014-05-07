@@ -11,8 +11,8 @@
   Ship.inherits(Asteroids.MovingObject);
 
   Ship.prototype.power = function(impulse) {
-    this.velocity[0] += impulse[0];
-    this.velocity[1] += impulse[1];
+    this.vel[0] += impulse[0];
+    this.vel[1] += impulse[1];
   };
 
 })(this);

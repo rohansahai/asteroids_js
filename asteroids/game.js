@@ -3,7 +3,7 @@
 
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
-    this.asteroids = this.addAsteroids(15);
+    this.asteroids = this.addAsteroids(5);
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
@@ -44,6 +44,7 @@
   };
 
   Game.prototype.start = function() {
+    this.bindKeyHandlers();
     var that = this;
     // window.setInterval returns a number (ID) representing the timer
     // we use this later to clear the interval (stop the game/ timer)
@@ -71,6 +72,14 @@
         this.asteroids.splice(i, 1);
       }
     }
-  }
+  };
+
+  Game.prototype.bindKeyHandlers = function() {
+    var that = this;
+    key('i', function(){ that.ship.power([0,-1]) });
+    key('j', function(){ that.ship.power([-1,0]) });
+    key('k', function(){ that.ship.power([0,1]) });
+    key('l', function(){ that.ship.power([1,0]) });
+  };
 
 })(this);
