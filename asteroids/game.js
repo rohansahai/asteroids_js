@@ -3,15 +3,18 @@
 
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
-    this.asteroids = this.addAsteroids(5);
+    this.asteroids = this.addAsteroids(15);
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
     this.bullets = [];
+    this.image = new Image();
+    this.image.src = 'milky_way.jpeg';
+    this.image.width = "500";
   }
 
-  Game.DIM_X = 500;
-  Game.DIM_Y = 500;
+  Game.DIM_X = 1000;
+  Game.DIM_Y = 1000;
   Game.FPS = 30;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
@@ -24,6 +27,9 @@
 
   Game.prototype.draw = function() {
     this.ctx.clearRect(0,0,500,500);
+
+    ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
+
     for (var i = 0; i < this.asteroids.length; i++){
       this.asteroids[i].draw(this.ctx);
     }
