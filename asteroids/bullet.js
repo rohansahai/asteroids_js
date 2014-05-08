@@ -7,4 +7,19 @@
 
   Bullet.inherits(Asteroids.MovingObject);
 
+  Bullet.prototype.hitAsteroids = function(game) {
+    for (var i = 0; i < game.asteroids.length; i++) {
+      if (this.isCollidedWith(game.asteroids[i])) {
+        game.removeAsteroid(game.asteroids[i]);
+        game.removeBullet(this);
+      }
+    }
+  };
+
+  Bullet.prototype.move = function(game) {
+    this.pos[0] += this.vel[0];
+    this.pos[1] += this.vel[1];
+    this.hitAsteroids(game);
+  }
+
 })(this);

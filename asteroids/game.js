@@ -41,8 +41,9 @@
     this.ship.move();
 
     for (var i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].move();
+      this.bullets[i].move(this);
     }
+
   };
 
   Game.prototype.step = function() {
@@ -94,6 +95,19 @@
 
   Game.prototype.fireBullet = function() {
     this.bullets.push(this.ship.fireBullet() );
+  };
+
+  Game.prototype.removeAsteroid = function(i) {
+    this.asteroids.splice(i, 1);
+  };
+
+  Game.prototype.removeBullet = function(bullet) {
+    for(var i = this.bullets.length - 1; i >= 0; i++) {
+      if (this.bullets[i] == bullet){
+        alert("removing bullet");
+        this.bullets.splice(i, 1);
+      }
+    }
   };
 
 })(this);
