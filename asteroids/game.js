@@ -88,10 +88,14 @@
 
   Game.prototype.removeAsteroids = function() {
     for(var i = this.asteroids.length-1; i >= 0; i--) {
-      if(this.asteroids[i].pos[0] < 0 || this.asteroids[i].pos[0] > Game.DIM_X) {
-        this.asteroids.splice(i, 1);
-      } else if(this.asteroids[i].pos[1] < 0 || this.asteroids[i].pos[1] > Game.DIM_Y) {
-        this.asteroids.splice(i, 1);
+      if(this.asteroids[i].pos[0] < 0){
+        this.asteroids[i].pos[0] = Game.Dim_X;
+      } else if(this.asteroids[i].pos[0] > Game.DIM_X) {
+        this.asteroids[i].pos[0] = 0;
+      } else if(this.asteroids[i].pos[1] < 0) {
+        this.asteroids[i].pos[0] = Game.Dim_Y;
+      } else if(this.asteroids[i].pos[1] > Game.DIM_Y) {
+        this.asteroids[i].pos[1] = 0;
       }
     }
   };
@@ -109,9 +113,9 @@
 
   Game.prototype.removeShip = function() {
     if(this.ship.pos[0] < 0 || this.ship.pos[0] > Game.DIM_X) {
-      this.ship.pos = [250, 250];
+      this.ship.pos = [Game.DIM_X/2, Game.DIM_Y/2];
     } else if(this.ship.pos[1] < 0 || this.ship.pos[1] > Game.DIM_Y) {
-      this.ship.pos = [250, 250];
+      this.ship.pos = [Game.DIM_X/2, Game.DIM_Y/2];
     }
   };
 
