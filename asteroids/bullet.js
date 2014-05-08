@@ -10,7 +10,7 @@
   Bullet.prototype.hitAsteroids = function(game) {
     for (var i = 0; i < game.asteroids.length; i++) {
       if (this.isCollidedWith(game.asteroids[i])) {
-        game.removeAsteroid(game.asteroids[i]);
+        game.removeAsteroid(i);
         game.removeBullet(this);
       }
     }
