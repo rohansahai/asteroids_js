@@ -10,7 +10,9 @@
     this.bullets = [];
     this.image = new Image();
     this.image.src = 'milky_way.jpeg';
-    this.image.width = "650";
+		
+		this.shipImage = new Image();
+		this.shipImage.src = 'banana.jpeg';
   }
 
   Game.DIM_X = 650;
@@ -27,13 +29,14 @@
 
   Game.prototype.draw = function() {
     this.ctx.clearRect(0,0,Game.DIM_X, Game.DIM_Y);
-
     ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
 
     for (var i = 0; i < this.asteroids.length; i++){
       this.asteroids[i].draw(this.ctx);
     }
-    this.ship.draw(this.ctx);
+		
+    //this.ship.draw(this.ctx);
+		this.ctx.drawImage(this.shipImage, this.ship.pos[0] - 25, this.ship.pos[1] - 25, 50, 50);
 
     for (var i = 0; i < this.bullets.length; i++) {
       this.bullets[i].draw(this.ctx);

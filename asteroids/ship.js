@@ -25,5 +25,21 @@
       "green"))
     }
   };
+  
+  Ship.prototype.draw = function(ctx) {
+	  
+		// var shipImage = new Image();
+// 		shipImage.src = 'banana.jpeg';
+// 		ctx.drawImage(shipImage, this.pos[0], this.pos[0], 50, 50);
+		
+		var shipImage = new Image();
+
+		shipImage.onload = function() {
+		  ctx.drawImage(shipImage, 250, 250);
+		};
+		shipImage.src = 'banana.jpeg';
+		
+  };
+  
 
 })(this);
