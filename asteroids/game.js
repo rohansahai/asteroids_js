@@ -21,7 +21,8 @@
 		this.asteroidImage = new Image();
 		this.asteroidImage.src = 'images/zoo_keeper.png';
 		
-		this.startTime = new Date;
+		this.startTime = new Date
+		this.gameTime = null;
   }
 
   Game.DIM_X = 650;
@@ -78,8 +79,8 @@
     this.draw();
     this.isOutOfBounds();
     this.checkCollisions();
-		this.isWin();
 		this.updateTimer();
+		this.isWin();
   };
 
   Game.prototype.isOutOfBounds = function(){
@@ -97,7 +98,8 @@
   };
 	
 	Game.prototype.updateTimer = function (){
-		$('.timer').text("Time: " + (new Date - this.startTime) / 1000);
+		this.gameTime = (new Date - this.startTime) / 1000;
+		$('.timer').text("Time: " + this.gameTime);
 	};
 
   Game.prototype.checkCollisions = function() {
@@ -111,7 +113,7 @@
 	
 	Game.prototype.isWin = function() {
 		if (this.asteroids.length === 0){
-			alert("You are free monkey!");
+			alert("You are free monkey! TIME: " + this.gameTime);
 			this.stop();
 		}
 	};
