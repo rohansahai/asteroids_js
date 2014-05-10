@@ -10,16 +10,18 @@
     this.bullets = [];
 		
     this.image = new Image();
-    this.image.src = 'milky_way.jpeg';
+    this.image.src = 'images/milky_way.jpeg';
 		
 		this.shipImage = new Image();
-		this.shipImage.src = 'monkey.png';
+		this.shipImage.src = 'images/monkey.png';
 		
 		this.bulletImage = new Image();
-		this.bulletImage.src = 'banana.png';
+		this.bulletImage.src = 'images/banana.png';
 		
 		this.asteroidImage = new Image();
-		this.asteroidImage.src = 'zoo_keeper.png';
+		this.asteroidImage.src = 'images/zoo_keeper.png';
+		
+		this.startTime = new Date;
   }
 
   Game.DIM_X = 650;
@@ -76,6 +78,8 @@
     this.draw();
     this.isOutOfBounds();
     this.checkCollisions();
+		this.isWin();
+		this.updateTimer();
   };
 
   Game.prototype.isOutOfBounds = function(){
@@ -91,15 +95,26 @@
     // we use this later to clear the interval (stop the game/ timer)
     this.intervalTimer = window.setInterval(that.step.bind(that), Game.FPS);
   };
+	
+	Game.prototype.updateTimer = function (){
+		$('.timer').text("Time: " + (new Date - this.startTime) / 1000);
+	};
 
   Game.prototype.checkCollisions = function() {
     for(var i = 0; i < this.asteroids.length; i++) {
       if (this.asteroids[i].isCollidedWith(this.ship)) {
-        alert("The game has ended");
+        alert("You're going back to zoo little monkey!!");
         this.stop();
       }
     }
   };
+	
+	Game.prototype.isWin = function() {
+		if (this.asteroids.length === 0){
+			alert("You are free monkey!");
+			this.stop();
+		}
+	};
 
   Game.prototype.stop = function() {
     clearInterval(this.intervalTimer);

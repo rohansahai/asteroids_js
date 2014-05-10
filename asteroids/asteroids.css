@@ -12,3 +12,21 @@ canvas {
 	
 	border: solid 5px;
 }
+
+#canvas-wrap { 
+	position:relative;
+	width:650px;
+	height:650px;
+	margin: 0 auto;
+}
+
+#canvas-wrap canvas { position:absolute; top:0; left:0; z-index:0 }
+
+.timer { 
+	position:absolute;
+	color: yellow;
+	font-weight:900;
+	font-size: 24px; 
+	top:10px; 
+	left:15px; 
+}
