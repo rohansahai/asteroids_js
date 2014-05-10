@@ -25,6 +25,9 @@
   Game.DIM_X = 650;
   Game.DIM_Y = 650;
   Game.FPS = 30;
+	Game.MONKEY_SIZE = 50;
+	Game.BANANA_SIZE = 30;
+	Game.ZOO_KEEPER_SIZE = 100;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     var asteroids = [];
@@ -39,15 +42,20 @@
     ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
 
     for (var i = 0; i < this.asteroids.length; i++){
-			this.ctx.drawImage(this.asteroidImage, this.asteroids[i].pos[0] - 50, this.asteroids[i].pos[1] - 50, 100, 100);
-      //this.asteroids[i].draw(this.ctx);
+			this.ctx.drawImage(this.asteroidImage, 
+				this.asteroids[i].pos[0] - Game.ZOO_KEEPER_SIZE/2, 
+				this.asteroids[i].pos[1] - Game.ZOO_KEEPER_SIZE/2,
+				Game.ZOO_KEEPER_SIZE, Game.ZOO_KEEPER_SIZE);
     }
 		
-		this.ctx.drawImage(this.shipImage, this.ship.pos[0] - 25, this.ship.pos[1] - 25, 50, 50);
+		this.ctx.drawImage(this.shipImage, this.ship.pos[0] - Game.MONKEY_SIZE/2,
+			this.ship.pos[1] - Game.MONKEY_SIZE/2, Game.MONKEY_SIZE, Game.MONKEY_SIZE);
 
     for (var i = 0; i < this.bullets.length; i++) {
-			this.ctx.drawImage(this.bulletImage, this.bullets[i].pos[0] - 15, this.bullets[i].pos[1] - 15, 30, 30);
-      //this.bullets[i].draw(this.ctx);
+			this.ctx.drawImage(this.bulletImage,
+				this.bullets[i].pos[0] - Game.BANANA_SIZE/2, 
+				this.bullets[i].pos[1] - Game.BANANA_SIZE/2, 
+				Game.BANANA_SIZE, Game.BANANA_SIZE);
     }
   };
 
