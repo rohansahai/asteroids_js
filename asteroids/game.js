@@ -3,18 +3,18 @@
 
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
-    this.asteroids = this.addAsteroids(15);
+    this.asteroids = this.addAsteroids(10); //NUMBER OF ASTEROIDS IN GAME
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
     this.bullets = [];
     this.image = new Image();
     this.image.src = 'milky_way.jpeg';
-    this.image.width = "500";
+    this.image.width = "650";
   }
 
-  Game.DIM_X = 1000;
-  Game.DIM_Y = 1000;
+  Game.DIM_X = 650;
+  Game.DIM_Y = 650;
   Game.FPS = 30;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
@@ -26,7 +26,7 @@
   };
 
   Game.prototype.draw = function() {
-    this.ctx.clearRect(0,0,500,500);
+    this.ctx.clearRect(0,0,Game.DIM_X, Game.DIM_Y);
 
     ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
 
@@ -60,7 +60,7 @@
   };
 
   Game.prototype.isOutOfBounds = function(){
-    this.removeAsteroids();
+    this.regenerateAsteroids();
     this.removeBullets();
     this.removeShip();
   };
@@ -86,14 +86,14 @@
     clearInterval(this.intervalTimer);
   };
 
-  Game.prototype.removeAsteroids = function() {
+  Game.prototype.regenerateAsteroids = function() {
     for(var i = this.asteroids.length-1; i >= 0; i--) {
       if(this.asteroids[i].pos[0] < 0){
-        this.asteroids[i].pos[0] = Game.Dim_X;
+        this.asteroids[i].pos[0] = Game.DIM_X;
       } else if(this.asteroids[i].pos[0] > Game.DIM_X) {
         this.asteroids[i].pos[0] = 0;
       } else if(this.asteroids[i].pos[1] < 0) {
-        this.asteroids[i].pos[0] = Game.Dim_Y;
+        this.asteroids[i].pos[1] = Game.DIM_Y;
       } else if(this.asteroids[i].pos[1] > Game.DIM_Y) {
         this.asteroids[i].pos[1] = 0;
       }
