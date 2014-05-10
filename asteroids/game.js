@@ -62,7 +62,7 @@
   Game.prototype.isOutOfBounds = function(){
     this.regenerateAsteroids();
     this.removeBullets();
-    this.removeShip();
+    this.regenerateShip();
   };
 
   Game.prototype.start = function() {
@@ -111,11 +111,15 @@
 
   };
 
-  Game.prototype.removeShip = function() {
-    if(this.ship.pos[0] < 0 || this.ship.pos[0] > Game.DIM_X) {
-      this.ship.pos = [Game.DIM_X/2, Game.DIM_Y/2];
-    } else if(this.ship.pos[1] < 0 || this.ship.pos[1] > Game.DIM_Y) {
-      this.ship.pos = [Game.DIM_X/2, Game.DIM_Y/2];
+  Game.prototype.regenerateShip = function() {
+    if(this.ship.pos[0] < 0){
+    	this.ship.pos[0] = Game.DIM_X;
+    } else if (this.ship.pos[0] > Game.DIM_X) {
+      this.ship.pos[0] = 0;
+    } else if(this.ship.pos[1] < 0){
+    	this.ship.pos[1] = Game.DIM_Y;
+    } else if(this.ship.pos[1] > Game.DIM_Y) {
+      this.ship.pos[1] = 0;
     }
   };
 
