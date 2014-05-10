@@ -8,11 +8,18 @@
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
     this.bullets = [];
+		
     this.image = new Image();
     this.image.src = 'milky_way.jpeg';
 		
 		this.shipImage = new Image();
-		this.shipImage.src = 'banana.jpeg';
+		this.shipImage.src = 'monkey.png';
+		
+		this.bulletImage = new Image();
+		this.bulletImage.src = 'banana.png';
+		
+		this.asteroidImage = new Image();
+		this.asteroidImage.src = 'zoo_keeper.png';
   }
 
   Game.DIM_X = 650;
@@ -32,14 +39,15 @@
     ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
 
     for (var i = 0; i < this.asteroids.length; i++){
-      this.asteroids[i].draw(this.ctx);
+			this.ctx.drawImage(this.asteroidImage, this.asteroids[i].pos[0] - 50, this.asteroids[i].pos[1] - 50, 100, 100);
+      //this.asteroids[i].draw(this.ctx);
     }
 		
-    //this.ship.draw(this.ctx);
 		this.ctx.drawImage(this.shipImage, this.ship.pos[0] - 25, this.ship.pos[1] - 25, 50, 50);
 
     for (var i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].draw(this.ctx);
+			this.ctx.drawImage(this.bulletImage, this.bullets[i].pos[0] - 15, this.bullets[i].pos[1] - 15, 30, 30);
+      //this.bullets[i].draw(this.ctx);
     }
   };
 
