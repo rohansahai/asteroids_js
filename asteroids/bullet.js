@@ -12,6 +12,7 @@
       if (this.isCollidedWith(game.asteroids[i])) {
         game.removeAsteroid(i);
         game.removeBullet(this);
+				game.audioElement.play();
       }
     }
   };

@@ -23,6 +23,9 @@
 		
 		this.startTime = new Date
 		this.gameTime = null;
+		
+		this.audioElement = document.createElement('audio');
+    this.audioElement.setAttribute('src', 'audio/MarioSuperJump.wav');
   }
 
   Game.DIM_X = 650;
@@ -107,6 +110,7 @@
       if (this.asteroids[i].isCollidedWith(this.ship)) {
         alert("You're going back to zoo little monkey!!");
         this.stop();
+				//this.start();
       }
     }
   };
@@ -166,6 +170,11 @@
     key('k', function(){ that.ship.power([0,1]) });
     key('l', function(){ that.ship.power([1,0]) });
     key('space', function(){ that.fireBullet() });
+		
+    this.audioElement.addEventListener("load", function() {
+        this.audioElement.play();
+    }, true);
+		
   };
 
   Game.prototype.fireBullet = function() {
