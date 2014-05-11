@@ -35,8 +35,9 @@
     var speed = Math.sqrt(Math.pow(this.vel[0],2) + Math.pow(this.vel[1], 2));
     var xVel = this.vel[0] * Math.sin(Ship.degreesToRadians(this.rotation));
     var yVel = this.vel[1] * Math.cos(Ship.degreesToRadians(this.rotation));
-    if (this.vel !== [0, 0]) {
-    return (new Asteroids.Bullet(
+
+    if (this.vel[0] !== 0 && this.vel[1] !== 0) {
+      return (new Asteroids.Bullet(
       [this.pos[0], this.pos[1]],
       [xVel * 10, yVel * 10],
       5,
@@ -45,9 +46,6 @@
   };
 
   Ship.prototype.move = function() {
-    //this.pos[0] += this.vel[0] * Math.tan(Ship.degreesToRadians(this.rotation));
-    //this.pos[1] += this.vel[1];
-    console.log(this.rotation)
     this.pos[0] += this.vel[0] * Math.sin(Ship.degreesToRadians(this.rotation));
     this.pos[1] += this.vel[1] * Math.cos(Ship.degreesToRadians(this.rotation));
   };

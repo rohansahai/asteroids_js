@@ -178,7 +178,10 @@
   };
 
   Game.prototype.fireBullet = function() {
-    this.bullets.push(this.ship.fireBullet() );
+    var newBullet = this.ship.fireBullet();
+    if (newBullet !== undefined){
+      this.bullets.push(newBullet);
+    }
   };
 
   Game.prototype.removeAsteroid = function(i) {
