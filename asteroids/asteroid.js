@@ -21,25 +21,23 @@
 
 	    var vecx = Math.floor(Math.random() * speed - speed/2);
 	    var vecy = Math.floor(Math.random() * speed - speed/2);
-			
+
 	    if (vecx === 0 && vecy === 0) {
 	      console.log("zero velocity asteroids are not aloud!");
 				legitAsteroid = false;
 	    };
-			
+
 			var spawnOffset = Asteroid.RADIUS + 20; //this is the value to offset asteroids away from the ship at the start of the game. Increase the value after the radius to make the game easier (at least at the start)
-			
-			if ((x > dimX/2 - spawnOffset && x < dimX/2 + spawnOffset) && 
+
+			if ((x > dimX/2 - spawnOffset && x < dimX/2 + spawnOffset) &&
 			(y > dimY/2 - spawnOffset && y < dimX/2 + spawnOffset)){
 				console.log("asteroid genereated too close to ship!");
 				legitAsteroid = false;
 			}
-			
+
 		}
 
-		console.log([x,y]);
     var randomVec = [vecx, vecy];
     return new Asteroid([x,y], randomVec, Asteroid.RADIUS, Asteroid.COLOR);
   };
 })(this);
-

@@ -3,27 +3,27 @@
 
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
-    this.asteroids = this.addAsteroids(10); //NUMBER OF ASTEROIDS IN GAME
+    this.asteroids = this.addAsteroids(1); //NUMBER OF ASTEROIDS IN GAME
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
     this.bullets = [];
-		
+
     this.image = new Image();
     this.image.src = 'images/milky_way.jpeg';
-		
+
 		this.shipImage = new Image();
 		this.shipImage.src = 'images/monkey.png';
-		
+
 		this.bulletImage = new Image();
 		this.bulletImage.src = 'images/banana.png';
-		
+
 		this.asteroidImage = new Image();
 		this.asteroidImage.src = 'images/zoo_keeper.png';
-		
+
 		this.startTime = new Date
 		this.gameTime = null;
-		
+
 		this.audioElement = document.createElement('audio');
     this.audioElement.setAttribute('src', 'audio/MarioSuperJump.wav');
   }
@@ -48,19 +48,19 @@
     ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
 
     for (var i = 0; i < this.asteroids.length; i++){
-			this.ctx.drawImage(this.asteroidImage, 
-				this.asteroids[i].pos[0] - Game.ZOO_KEEPER_SIZE/2, 
+			this.ctx.drawImage(this.asteroidImage,
+				this.asteroids[i].pos[0] - Game.ZOO_KEEPER_SIZE/2,
 				this.asteroids[i].pos[1] - Game.ZOO_KEEPER_SIZE/2,
 				Game.ZOO_KEEPER_SIZE, Game.ZOO_KEEPER_SIZE);
     }
-		
+
 		this.ctx.drawImage(this.shipImage, this.ship.pos[0] - Game.MONKEY_SIZE/2,
 			this.ship.pos[1] - Game.MONKEY_SIZE/2, Game.MONKEY_SIZE, Game.MONKEY_SIZE);
 
     for (var i = 0; i < this.bullets.length; i++) {
 			this.ctx.drawImage(this.bulletImage,
-				this.bullets[i].pos[0] - Game.BANANA_SIZE/2, 
-				this.bullets[i].pos[1] - Game.BANANA_SIZE/2, 
+				this.bullets[i].pos[0] - Game.BANANA_SIZE/2,
+				this.bullets[i].pos[1] - Game.BANANA_SIZE/2,
 				Game.BANANA_SIZE, Game.BANANA_SIZE);
     }
   };
@@ -99,7 +99,7 @@
     // we use this later to clear the interval (stop the game/ timer)
     this.intervalTimer = window.setInterval(that.step.bind(that), Game.FPS);
   };
-	
+
 	Game.prototype.updateTimer = function (){
 		this.gameTime = (new Date - this.startTime) / 1000;
 		$('.timer').text("Time: " + this.gameTime);
@@ -114,7 +114,7 @@
       }
     }
   };
-	
+
 	Game.prototype.isWin = function() {
 		if (this.asteroids.length === 0){
 			alert("You are free monkey! TIME: " + this.gameTime);
@@ -165,16 +165,16 @@
 
   Game.prototype.bindKeyHandlers = function() {
     var that = this;
-    key('i', function(){ that.ship.power([0,-1]) });
-    key('j', function(){ that.ship.power([-1,0]) });
-    key('k', function(){ that.ship.power([0,1]) });
-    key('l', function(){ that.ship.power([1,0]) });
+    key('i', function(){ that.ship.power([1,-1]) });
+    key('j', function(){ that.ship.rotate("left") });
+    key('k', function(){ that.ship.power([-1,1]) });
+    key('l', function(){ that.ship.rotate("right") });
     key('space', function(){ that.fireBullet() });
-		
+
     this.audioElement.addEventListener("load", function() {
         this.audioElement.play();
     }, true);
-		
+
   };
 
   Game.prototype.fireBullet = function() {

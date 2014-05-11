@@ -25,9 +25,9 @@
 
   Ship.prototype.rotate = function(dir) {
     if (dir === "left"){
-      this.rotation -= 5;
+      this.rotation -= 15;
     } else {
-      this.rotation += 5;
+      this.rotation += 15;
     }
   }
 
@@ -43,8 +43,11 @@
   };
 
   Ship.prototype.move = function() {
-    this.pos[0] += this.vel[0] * Math.tan(Ship.degreesToRadians(this.rotation));
-    this.pos[1] += this.vel[1];
+    //this.pos[0] += this.vel[0] * Math.tan(Ship.degreesToRadians(this.rotation));
+    //this.pos[1] += this.vel[1];
+    console.log(this.rotation)
+    this.pos[0] += this.vel[0] * Math.sin(Ship.degreesToRadians(this.rotation));
+    this.pos[1] += this.vel[1] * Math.cos(Ship.degreesToRadians(this.rotation));;
   };
 
   Ship.prototype.draw = function(ctx) {
