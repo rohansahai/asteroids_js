@@ -67,8 +67,8 @@
   	// and height of the image
   	//game.ctx.drawImage(image, -(image.width/2), -(image.height/2));
     game.ctx.drawImage(game.shipImage,
-      -25,
-      -25,
+      -Asteroids.Game.MONKEY_SIZE/2,
+      -Asteroids.Game.MONKEY_SIZE/2,
       Asteroids.Game.MONKEY_SIZE, Asteroids.Game.MONKEY_SIZE);
 
   	// and restore the co-ords to how they were when we began
