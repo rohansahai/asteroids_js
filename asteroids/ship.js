@@ -50,14 +50,29 @@
     this.pos[1] += this.vel[1] * Math.cos(Ship.degreesToRadians(this.rotation));
   };
 
-  Ship.prototype.draw = function(ctx) {
+  Ship.prototype.draw = function(game) {
 
-		var shipImage = new Image();
+      // save the current co-ordinate system
+  	// before we screw with it
+  	game.ctx.save();
 
-		shipImage.onload = function() {
-		  ctx.drawImage(shipImage, 250, 250);
-		};
-		shipImage.src = 'banana.jpeg';
+  	// move to the middle of where we want to draw our image
+  	game.ctx.translate(this.pos[0] + 25, this.pos[1] + 25);
+
+  	// rotate around that point, converting our
+  	// angle from degrees to radians
+  	game.ctx.rotate(Ship.degreesToRadians(this.rotation));
+
+  	// draw it up and to the left by half the width
+  	// and height of the image
+  	//game.ctx.drawImage(image, -(image.width/2), -(image.height/2));
+    game.ctx.drawImage(game.shipImage,
+      0,
+      0,
+      Asteroids.Game.MONKEY_SIZE, Asteroids.Game.MONKEY_SIZE);
+
+  	// and restore the co-ords to how they were when we began
+  	game.ctx.restore();
 
   };
 

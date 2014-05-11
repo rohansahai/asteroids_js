@@ -54,8 +54,10 @@
 				Game.ZOO_KEEPER_SIZE, Game.ZOO_KEEPER_SIZE);
     }
 
-		this.ctx.drawImage(this.shipImage, this.ship.pos[0] - Game.MONKEY_SIZE/2,
-			this.ship.pos[1] - Game.MONKEY_SIZE/2, Game.MONKEY_SIZE, Game.MONKEY_SIZE);
+    this.ship.draw(this);
+
+		// this.ctx.drawImage(this.shipImage, this.ship.pos[0] - Game.MONKEY_SIZE/2,
+		// 	this.ship.pos[1] - Game.MONKEY_SIZE/2, Game.MONKEY_SIZE, Game.MONKEY_SIZE);
 
     for (var i = 0; i < this.bullets.length; i++) {
 			this.ctx.drawImage(this.bulletImage,
