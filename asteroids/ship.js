@@ -66,7 +66,6 @@
   Ship.prototype.move = function() {
     this.pos[0] += this.vel[0] * Math.sin(Ship.degreesToRadians(this.rotation));
     this.pos[1] += this.vel[1] * Math.cos(Ship.degreesToRadians(this.rotation));
-    console.log(this.vel[0], this.vel[1]);
   };
 
   Ship.prototype.draw = function(game) {

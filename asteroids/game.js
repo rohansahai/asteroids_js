@@ -24,6 +24,7 @@
 		this.startTime = new Date
 		this.gameTime = null;
 
+    this.lastBulletFired = null;
     this.keys = {};
   }
 
@@ -198,9 +199,13 @@
 
   Game.prototype.fireBullet = function() {
     var newBullet = this.ship.fireBullet();
-    if (newBullet !== undefined){
+    var bulletGap = (new Date - this.lastBulletFired) / 1000;
+    console.log(bulletGap)
+    if (newBullet !== undefined && bulletGap > .5){
       this.bullets.push(newBullet);
+      this.lastBulletFired = new Date();
     }
+
   };
 
   Game.prototype.removeAsteroid = function(i) {
