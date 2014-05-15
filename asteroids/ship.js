@@ -32,14 +32,14 @@
   }
 
   Ship.prototype.fireBullet = function() {
-    var speed = Math.sqrt(Math.pow(this.vel[0],2) + Math.pow(this.vel[1], 2));
-    var xVel = this.vel[0] * Math.sin(Ship.degreesToRadians(this.rotation));
-    var yVel = this.vel[1] * Math.cos(Ship.degreesToRadians(this.rotation));
+    var xVel = this.vel[0]/Math.abs(this.vel[0]) * Math.sin(Ship.degreesToRadians(this.rotation));
+    var yVel = this.vel[1]/Math.abs(this.vel[1]) * Math.cos(Ship.degreesToRadians(this.rotation));
+    var speed = Math.sqrt(Math.pow(xVel,2) + Math.pow(yVel, 2));
 
     if (this.vel[0] !== 0 && this.vel[1] !== 0) {
       return (new Asteroids.Bullet(
       [this.pos[0], this.pos[1]],
-      [xVel * 3, yVel * 3],
+      [xVel * 10, yVel * 10],
       5,
       "green"))
     }
