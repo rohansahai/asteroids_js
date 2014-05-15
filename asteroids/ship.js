@@ -21,6 +21,24 @@
   Ship.prototype.power = function(impulse) {
     this.vel[0] += impulse[0];
     this.vel[1] += impulse[1];
+
+    //throw this in other helper method??
+    if (this.vel[0] > 10){
+      this.vel[0] = 10;
+    }
+
+    if (this.vel[0] < -10){
+      this.vel[0] = -10;
+    }
+
+    if (this.vel[1] > 10){
+      this.vel[1] = 10;
+    }
+
+    if (this.vel[1] < -10){
+      this.vel[1] = -10;
+    }
+
   };
 
   Ship.prototype.rotate = function(dir) {
@@ -48,6 +66,7 @@
   Ship.prototype.move = function() {
     this.pos[0] += this.vel[0] * Math.sin(Ship.degreesToRadians(this.rotation));
     this.pos[1] += this.vel[1] * Math.cos(Ship.degreesToRadians(this.rotation));
+    console.log(this.vel[0], this.vel[1]);
   };
 
   Ship.prototype.draw = function(game) {
