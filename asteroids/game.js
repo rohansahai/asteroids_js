@@ -28,8 +28,8 @@
     this.audioElement.setAttribute('src', 'audio/MarioSuperJump.wav');
   }
 
-  Game.DIM_X = 650;
-  Game.DIM_Y = 650;
+  Game.DIM_X = window.innerWidth - 20;
+  Game.DIM_Y = window.innerHeight - 20;
   Game.FPS = 30;
 	Game.MONKEY_SIZE = 50;
 	Game.BANANA_SIZE = 30;
@@ -45,7 +45,7 @@
 
   Game.prototype.draw = function() {
     this.ctx.clearRect(0,0,Game.DIM_X, Game.DIM_Y);
-    ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
+    //ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
 
     for (var i = 0; i < this.asteroids.length; i++){
 			this.ctx.drawImage(this.asteroidImage,

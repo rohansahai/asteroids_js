@@ -6,10 +6,10 @@
 </head>
 <body>
 		<h1> Monkey Trouble! </h1>
-		
+
 		<div id="canvas-wrap">
-			<canvas width="650" height="650"> </canvas>
-			<div class="timer"> Hello </div> 
+			<canvas> </canvas>
+			<div class="timer"> Hello </div>
 		</div>
     <!-- MAKE SURE YOU CHANGE GAME DIMENSIONS WHEN CHANGING CANVAS SIZE -->
     <script src="jQuery.js"></script>
@@ -22,9 +22,11 @@
 
     <script>
         var canvas = document.getElementsByTagName("canvas")[0];
+				canvas.height = window.innerHeight - 20;
+				canvas.width = window.innerWidth - 20;
         var ctx = canvas.getContext("2d");
         new Asteroids.Game(ctx).start();
     </script>
-		
+
 </body>
 </html>
