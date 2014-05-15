@@ -39,7 +39,7 @@
     if (this.vel[0] !== 0 && this.vel[1] !== 0) {
       return (new Asteroids.Bullet(
       [this.pos[0], this.pos[1]],
-      [xVel * 10, yVel * 10],
+      [xVel * 3, yVel * 3],
       5,
       "green"))
     }
