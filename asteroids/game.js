@@ -3,7 +3,7 @@
 
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
-    this.asteroids = this.addAsteroids(10); //NUMBER OF ASTEROIDS IN GAME
+    this.asteroids = this.addAsteroids(1); //NUMBER OF ASTEROIDS IN GAME
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
