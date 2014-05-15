@@ -5,9 +5,8 @@
     <title>Asteroids</title>
 </head>
 <body>
-		<h1> Monkey Trouble! </h1>
-
 		<div id="canvas-wrap">
+			<h1> Monkey Trouble! </h1>
 			<canvas> </canvas>
 			<div class="timer"> Hello </div>
 		</div>
@@ -22,8 +21,8 @@
 
     <script>
         var canvas = document.getElementsByTagName("canvas")[0];
-				canvas.height = window.innerHeight - 20;
-				canvas.width = window.innerWidth - 20;
+				canvas.height = window.innerHeight - 10;
+				canvas.width = window.innerWidth - 10;
         var ctx = canvas.getContext("2d");
         new Asteroids.Game(ctx).start();
     </script>

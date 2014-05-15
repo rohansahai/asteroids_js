@@ -10,7 +10,7 @@
     this.bullets = [];
 
     this.image = new Image();
-    this.image.src = 'images/milky_way.jpeg';
+    this.image.src = 'images/jungle-plant-background.jpg';
 
 		this.shipImage = new Image();
 		this.shipImage.src = 'images/monkey.png';
@@ -24,12 +24,11 @@
 		this.startTime = new Date
 		this.gameTime = null;
 
-		this.audioElement = document.createElement('audio');
-    this.audioElement.setAttribute('src', 'audio/MarioSuperJump.wav');
+    this.keys = {};
   }
 
-  Game.DIM_X = window.innerWidth - 20;
-  Game.DIM_Y = window.innerHeight - 20;
+  Game.DIM_X = window.innerWidth - 10;
+  Game.DIM_Y = window.innerHeight - 10;
   Game.FPS = 30;
 	Game.MONKEY_SIZE = 50;
 	Game.BANANA_SIZE = 30;
@@ -45,8 +44,7 @@
 
   Game.prototype.draw = function() {
     this.ctx.clearRect(0,0,Game.DIM_X, Game.DIM_Y);
-    //ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
-
+    ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
     for (var i = 0; i < this.asteroids.length; i++){
 			this.ctx.drawImage(this.asteroidImage,
 				this.asteroids[i].pos[0] - Game.ZOO_KEEPER_SIZE/2,
@@ -68,6 +66,22 @@
   };
 
   Game.prototype.move = function() {
+    if (this.keys[73]){
+      this.ship.power([1,-1]);
+    }
+    if (this.keys[74]){
+      this.ship.rotate("left");
+    }
+    if (this.keys[75]){
+      this.ship.power([-1,1]);
+    }
+    if (this.keys[76]){
+      this.ship.rotate("right");
+    }
+    if (this.keys[32]){
+      this.fireBullet();
+    }
+
     for (var i = 0; i < this.asteroids.length; i++){
       this.asteroids[i].move();
     }
@@ -167,16 +181,19 @@
 
   Game.prototype.bindKeyHandlers = function() {
     var that = this;
-    key('i', function(){ that.ship.power([1,-1]) });
-    key('j', function(){ that.ship.rotate("left") });
-    key('k', function(){ that.ship.power([-1,1]) });
-    key('l', function(){ that.ship.rotate("right") });
-    key('space', function(){ that.fireBullet() });
 
-    this.audioElement.addEventListener("load", function() {
-        this.audioElement.play();
-    }, true);
+    $(document).keydown(function(e){
+      that.keys[e.which] = true;
+    });
 
+    $(document).keyup(function(e){
+      that.keys[e.which] = false;
+    });
+    //key('i', function(){ that.ship.power([1,-1]) });
+    // key('j', function(){ that.ship.rotate("left") });
+    // key('k', function(){ that.ship.power([-1,1]) });
+    // key('l', function(){ that.ship.rotate("right") });
+    // key('space', function(){ that.fireBullet() });
   };
 
   Game.prototype.fireBullet = function() {

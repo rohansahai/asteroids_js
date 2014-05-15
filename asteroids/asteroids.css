@@ -1,6 +1,9 @@
 h1 {
+	position:absolute;
+	color: #FF9A43;
 	font-family: sans-serif;
 	text-align: center;
+	color: #FF9A43;
 }
 
 canvas {
@@ -9,7 +12,8 @@ canvas {
   margin-left: auto;
   margin-right: auto;
   display: block;
-
+	border: solid 5px;
+	/*background: #7F6B4B;*/
 }
 
 /*#canvas-wrap {
@@ -23,7 +27,7 @@ canvas {
 
 .timer {
 	position:absolute;
-	color: black;
+	color: #FF9A43;
 	font-family: sans-serif;
 	font-weight:900;
 	font-size: 24px;
