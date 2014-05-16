@@ -24,6 +24,10 @@
     this.pos[0] += this.vel[0];
     this.pos[1] += this.vel[1];
     this.hitAsteroids(game);
-  }
+  };
+  // 
+  // Bullet.randomFloatingBullet = function(dimX, dimY) {
+  //   return new Bullet([300,300], [0,0], 5);
+  // }
 
 })(this);

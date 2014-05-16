@@ -4,6 +4,7 @@
   var Ship = Asteroids.Ship = function(pos, vel, radius, color){
     Asteroids.MovingObject.call(this, pos, vel, radius, color);
     this.rotation = 0;
+    this.ammo = 0;
   };
 
   Ship.RADIUS = 25;
@@ -43,9 +44,9 @@
 
   Ship.prototype.rotate = function(dir) {
     if (dir === "left"){
-      this.rotation -= 15;
+      this.rotation -= 12;
     } else {
-      this.rotation += 15;
+      this.rotation += 12;
     }
   }
 
@@ -57,7 +58,7 @@
     if (this.vel[0] !== 0 && this.vel[1] !== 0) {
       return (new Asteroids.Bullet(
       [this.pos[0], this.pos[1]],
-      [xVel * 10, yVel * 10],
+      [xVel * 20, yVel * 20],
       5,
       "green"))
     }
@@ -94,5 +95,8 @@
 
   };
 
+  Ship.prototype.addAmmo = function(num) {
+    this.ammo += num;
+  }
 
 })(this);

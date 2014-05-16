@@ -8,6 +8,7 @@
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
     this.bullets = [];
+    this.treasure = this.addTreasure(1);
 
     this.image = new Image();
     this.image.src = 'images/jungle-plant-background.jpg';
@@ -19,7 +20,7 @@
 		this.bulletImage.src = 'images/banana.png';
 
 		this.asteroidImage = new Image();
-		this.asteroidImage.src = 'images/zoo_keeper.png';
+		this.asteroidImage.src = 'images/kanye.png';
 
 		this.startTime = new Date
 		this.gameTime = null;
@@ -43,6 +44,14 @@
     return asteroids;
   };
 
+  Game.prototype.addTreasure = function(numTreasure) {
+    var treasure = [];
+    for(var i = 0; i < numTreasure; i++) {
+      treasure.push(Asteroids.Treasure.randomTreasure(Game.DIM_X, Game.DIM_Y));
+    }
+    return treasure;
+  };
+
   Game.prototype.draw = function() {
     this.ctx.clearRect(0,0,Game.DIM_X, Game.DIM_Y);
     ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
@@ -50,13 +59,10 @@
 			this.ctx.drawImage(this.asteroidImage,
 				this.asteroids[i].pos[0] - Game.ZOO_KEEPER_SIZE/2,
 				this.asteroids[i].pos[1] - Game.ZOO_KEEPER_SIZE/2,
-				Game.ZOO_KEEPER_SIZE, Game.ZOO_KEEPER_SIZE);
+				Game.ZOO_KEEPER_SIZE, Game.ZOO_KEEPER_SIZE + 20);
     }
 
     this.ship.draw(this);
-
-		// this.ctx.drawImage(this.shipImage, this.ship.pos[0] - Game.MONKEY_SIZE/2,
-		// 	this.ship.pos[1] - Game.MONKEY_SIZE/2, Game.MONKEY_SIZE, Game.MONKEY_SIZE);
 
     for (var i = 0; i < this.bullets.length; i++) {
 			this.ctx.drawImage(this.bulletImage,
@@ -64,9 +70,30 @@
 				this.bullets[i].pos[1] - Game.BANANA_SIZE/2,
 				Game.BANANA_SIZE, Game.BANANA_SIZE);
     }
+
+    for (var i = 0; i < this.treasure.length; i++) {
+      this.ctx.drawImage(this.bulletImage,
+        this.treasure[i].pos[0] - Game.BANANA_SIZE/2,
+        this.treasure[i].pos[1] - Game.BANANA_SIZE/2,
+        Game.BANANA_SIZE, Game.BANANA_SIZE);
+    }
   };
 
   Game.prototype.move = function() {
+    this.checkHeldKeys();
+
+    for (var i = 0; i < this.asteroids.length; i++){
+      this.asteroids[i].move();
+    }
+    this.ship.move();
+
+    for (var i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].move(this);
+    }
+
+  };
+
+  Game.prototype.checkHeldKeys = function () {
     if (this.keys[73]){
       this.ship.power([1,-1]);
     }
@@ -82,16 +109,6 @@
     if (this.keys[32]){
       this.fireBullet();
     }
-
-    for (var i = 0; i < this.asteroids.length; i++){
-      this.asteroids[i].move();
-    }
-    this.ship.move();
-
-    for (var i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].move(this);
-    }
-
   };
 
   Game.prototype.step = function() {
@@ -123,11 +140,18 @@
 	};
 
   Game.prototype.checkCollisions = function() {
+    //check if the ship has collided with the any asteroids
     for(var i = 0; i < this.asteroids.length; i++) {
       if (this.asteroids[i].isCollidedWith(this.ship)) {
         alert("You're going back to zoo little monkey!!");
         this.stop();
-				//this.start();
+      }
+    }
+    //check if the ship has picked up any ammo
+    for(var i = this.treasure.length - 1; i >= 0; i--) {
+      if (this.treasure[i].isCollidedWith(this.ship)) {
+        this.ship.addAmmo(5);
+        this.treasure.splice(i,1);
       }
     }
   };
@@ -190,20 +214,15 @@
     $(document).keyup(function(e){
       that.keys[e.which] = false;
     });
-    //key('i', function(){ that.ship.power([1,-1]) });
-    // key('j', function(){ that.ship.rotate("left") });
-    // key('k', function(){ that.ship.power([-1,1]) });
-    // key('l', function(){ that.ship.rotate("right") });
-    // key('space', function(){ that.fireBullet() });
   };
 
   Game.prototype.fireBullet = function() {
     var newBullet = this.ship.fireBullet();
     var bulletGap = (new Date - this.lastBulletFired) / 1000;
-    console.log(bulletGap)
-    if (newBullet !== undefined && bulletGap > .5){
+    if (newBullet !== undefined && bulletGap > .5 && this.ship.ammo > 0){
       this.bullets.push(newBullet);
       this.lastBulletFired = new Date();
+      this.ship.ammo -= 1;
     }
 
   };
