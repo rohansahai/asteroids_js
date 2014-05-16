@@ -27,6 +27,7 @@
 
     this.lastBulletFired = null;
     this.keys = {};
+    this.frameCount = 0;
   }
 
   Game.DIM_X = window.innerWidth - 10;
@@ -117,8 +118,15 @@
     this.isOutOfBounds();
     this.checkCollisions();
 		this.updateTimer();
+    this.addAmmo();
 		this.isWin();
   };
+
+  Game.prototype.addAmmo = function() {
+    if (this.frameCount % 150 === 0){
+      this.treasure = this.addTreasure(1);
+    }
+  }
 
   Game.prototype.isOutOfBounds = function(){
     this.regenerateAsteroids();
@@ -135,6 +143,7 @@
   };
 
 	Game.prototype.updateTimer = function (){
+    this.frameCount += 1;
 		this.gameTime = (new Date - this.startTime) / 1000;
 		$('.timer').text("Time: " + this.gameTime);
 	};
