@@ -8,6 +8,7 @@
   };
 
   Ship.RADIUS = 25;
+  Ship.MAX_VEL = 15;
   Ship.COLOR = "blue";
 
   Ship.inherits(Asteroids.MovingObject);
@@ -24,20 +25,20 @@
     this.vel[1] += impulse[1];
 
     //throw this in other helper method??
-    if (this.vel[0] > 10){
-      this.vel[0] = 10;
+    if (this.vel[0] > Ship.MAX_VEL){
+      this.vel[0] = Ship.MAX_VEL;
     }
 
-    if (this.vel[0] < -10){
-      this.vel[0] = -10;
+    if (this.vel[0] < -Ship.MAX_VEL){
+      this.vel[0] = -Ship.MAX_VEL;
     }
 
-    if (this.vel[1] > 10){
-      this.vel[1] = 10;
+    if (this.vel[1] > Ship.MAX_VEL){
+      this.vel[1] = Ship.MAX_VEL;
     }
 
-    if (this.vel[1] < -10){
-      this.vel[1] = -10;
+    if (this.vel[1] < -Ship.MAX_VEL){
+      this.vel[1] = -Ship.MAX_VEL;
     }
 
   };
@@ -50,7 +51,10 @@
     }
   }
 
-  Ship.prototype.fireBullet = function() {
+  Ship.prototype.fireBullet = function(radius, speedFactor) {
+    radius = radius || 5;
+    speedFactor = speedFactor || 20;
+
     var xVel = this.vel[0]/Math.abs(this.vel[0]) * Math.sin(Ship.degreesToRadians(this.rotation));
     var yVel = this.vel[1]/Math.abs(this.vel[1]) * Math.cos(Ship.degreesToRadians(this.rotation));
     var speed = Math.sqrt(Math.pow(xVel,2) + Math.pow(yVel, 2));
@@ -58,8 +62,8 @@
     if (this.vel[0] !== 0 && this.vel[1] !== 0) {
       return (new Asteroids.Bullet(
       [this.pos[0], this.pos[1]],
-      [xVel * 20, yVel * 20],
-      5,
+      [xVel * speedFactor, yVel * speedFactor],
+      radius,
       "green"))
     }
   };

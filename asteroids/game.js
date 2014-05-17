@@ -3,11 +3,12 @@
 
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
-    this.asteroids = this.addAsteroids(1); //NUMBER OF ASTEROIDS IN GAME
+    this.asteroids = this.addAsteroids(7); //NUMBER OF ASTEROIDS IN GAME
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
     this.bullets = [];
+    this.specialBullets = [];
     this.treasure = this.addTreasure(1);
 
     this.image = new Image();
@@ -19,6 +20,12 @@
 		this.bulletImage = new Image();
 		this.bulletImage.src = 'images/banana.png';
 
+    this.ammoImage = new Image();
+    this.ammoImage.src = 'images/ammo.png';
+
+    this.specialBulletImage = new Image();
+    this.specialBulletImage.src = 'images/special.jpeg'
+
 		this.asteroidImage = new Image();
 		this.asteroidImage.src = 'images/kanye.png';
 
@@ -28,6 +35,11 @@
     this.lastBulletFired = null;
     this.keys = {};
     this.frameCount = 0;
+    this.kills = 0;
+
+    audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'audio/Traitor.mp3');
+    audioElement.play();
   }
 
   Game.DIM_X = window.innerWidth - 10;
@@ -73,10 +85,17 @@
     }
 
     for (var i = 0; i < this.treasure.length; i++) {
-      this.ctx.drawImage(this.bulletImage,
+      this.ctx.drawImage(this.ammoImage,
         this.treasure[i].pos[0] - Game.BANANA_SIZE/2,
         this.treasure[i].pos[1] - Game.BANANA_SIZE/2,
-        Game.BANANA_SIZE, Game.BANANA_SIZE);
+        50, 50);
+    }
+
+    for (var i = 0; i < this.specialBullets.length; i++) {
+      this.ctx.drawImage(this.specialBulletImage,
+        this.specialBullets[i].pos[0] - Game.ZOO_KEEPER_SIZE/2,
+        this.specialBullets[i].pos[1] - Game.ZOO_KEEPER_SIZE/2,
+        150, 150);
     }
   };
 
@@ -90,6 +109,10 @@
 
     for (var i = 0; i < this.bullets.length; i++) {
       this.bullets[i].move(this);
+    }
+
+    for (var i = 0; i < this.specialBullets.length; i++) {
+      this.specialBullets[i].move(this, true);
     }
 
   };
@@ -110,6 +133,9 @@
     if (this.keys[32]){
       this.fireBullet();
     }
+    if (this.keys[83]){
+      this.fireSpecial();
+    }
   };
 
   Game.prototype.step = function() {
@@ -118,13 +144,18 @@
     this.isOutOfBounds();
     this.checkCollisions();
 		this.updateTimer();
-    this.addAmmo();
+    this.addFieldObjects();
 		this.isWin();
   };
 
-  Game.prototype.addAmmo = function() {
+  Game.prototype.addFieldObjects = function() {
+    //add ammo every 5 seconds
     if (this.frameCount % 150 === 0){
       this.treasure = this.addTreasure(1);
+    }
+    //add asteroids every n seconds
+    if (this.frameCount % 150 === 0){
+      this.asteroids = this.asteroids.concat(this.addAsteroids(1));
     }
   }
 
@@ -146,6 +177,8 @@
     this.frameCount += 1;
 		this.gameTime = (new Date - this.startTime) / 1000;
 		$('.timer').text("Time: " + this.gameTime);
+    $(".ammo").html("Bananas: " + this.ship.ammo);
+    $(".kills").html("Kanye Slayings: " + this.kills);
 	};
 
   Game.prototype.checkCollisions = function() {
@@ -199,6 +232,15 @@
       }
     }
 
+    for(var i = this.specialBullets.length-1; i >= 0; i--) {
+      if(this.specialBullets[i].pos[0] < 0 || this.specialBullets[i].pos[0] > Game.DIM_X) {
+        this.specialBullets.splice(i, 1);
+      } else if(this.specialBullets[i].pos[1] < 0 || this.specialBullets[i].pos[1] > Game.DIM_Y) {
+        this.specialBullets.splice(i, 1);
+      }
+    }
+
+
   };
 
   Game.prototype.regenerateShip = function() {
@@ -234,6 +276,14 @@
       this.ship.ammo -= 1;
     }
 
+  };
+
+  Game.prototype.fireSpecial = function() {
+    var newBullet = this.ship.fireBullet(50, 10);
+    if (newBullet !== undefined && this.kills >= 1){
+      this.specialBullets.push(newBullet);
+      this.kills++
+    }
   };
 
   Game.prototype.removeAsteroid = function(i) {

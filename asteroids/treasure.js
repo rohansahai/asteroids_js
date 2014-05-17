@@ -6,7 +6,7 @@
   };
 
   Treasure.inherits(Asteroids.MovingObject);
-  Treasure.RADIUS = 10;
+  Treasure.RADIUS = 20;
 
   Treasure.randomTreasure = function(dimX, dimY) {
 
