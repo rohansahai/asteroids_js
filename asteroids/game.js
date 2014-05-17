@@ -73,19 +73,21 @@
   Game.prototype.move = function() {
     this.checkHeldKeys();
 
-    for (var i = 0; i < this.asteroids.length; i++){
-      this.asteroids[i].move();
-    }
-    this.ship.move();
 
-    for (var i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].move(this);
-    }
+    this.ship.move();
+    this.moveItem(this.asteroids);
+    this.moveItem(this.bullets);
 
     for (var i = 0; i < this.specialBullets.length; i++) {
       this.specialBullets[i].move(this, true);
     }
 
+  };
+
+  Game.prototype.moveItem = function(items) {
+    for (var i = 0; i < items.length; i++){
+      items[i].move(this);
+    }
   };
 
   Game.prototype.checkHeldKeys = function () {
