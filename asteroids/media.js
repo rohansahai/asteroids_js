@@ -1,9 +1,9 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  Game.prototype.loadMedia = function() {
-    this.image = new Image();
-    this.image.src = 'images/jungle-plant-background.jpg';
+  Asteroids.Game.prototype.loadMedia = function() {
+    this.backgroundImage = new Image();
+    this.backgroundImage.src = 'images/jungle-plant-background.jpg';
 
     this.shipImage = new Image();
     this.shipImage.src = 'images/monkey.png';

@@ -31,7 +31,7 @@
   Game.FPS = 30;
 	Game.MONKEY_SIZE = 50;
 	Game.BANANA_SIZE = 30;
-	Game.ZOO_KEEPER_SIZE = 100;
+	Game.ASTEROID_SIZE = 100;
 
   Game.prototype.addAsteroids = function(numAsteroids) {
     var asteroids = [];
@@ -51,35 +51,22 @@
 
   Game.prototype.draw = function() {
     this.ctx.clearRect(0,0,Game.DIM_X, Game.DIM_Y);
-    ctx.drawImage(this.image, 0, 0, Game.DIM_X, Game.DIM_Y);
-    for (var i = 0; i < this.asteroids.length; i++){
-			this.ctx.drawImage(this.asteroidImage,
-				this.asteroids[i].pos[0] - Game.ZOO_KEEPER_SIZE/2,
-				this.asteroids[i].pos[1] - Game.ZOO_KEEPER_SIZE/2,
-				Game.ZOO_KEEPER_SIZE, Game.ZOO_KEEPER_SIZE + 20);
-    }
-
+    ctx.drawImage(this.backgroundImage, 0, 0, Game.DIM_X, Game.DIM_Y);
     this.ship.draw(this);
 
-    for (var i = 0; i < this.bullets.length; i++) {
-			this.ctx.drawImage(this.bulletImage,
-				this.bullets[i].pos[0] - Game.BANANA_SIZE/2,
-				this.bullets[i].pos[1] - Game.BANANA_SIZE/2,
-				Game.BANANA_SIZE, Game.BANANA_SIZE);
-    }
+    this.drawItem(this.asteroids, Game.ASTEROID_SIZE, this.asteroidImage, 20);
+    this.drawItem(this.bullets, Game.BANANA_SIZE, this.bulletImage);
+    this.drawItem(this.treasure, 50, this.ammoImage);
+    this.drawItem(this.specialBullets, 150, this.specialBulletImage);
+  };
 
-    for (var i = 0; i < this.treasure.length; i++) {
-      this.ctx.drawImage(this.ammoImage,
-        this.treasure[i].pos[0] - Game.BANANA_SIZE/2,
-        this.treasure[i].pos[1] - Game.BANANA_SIZE/2,
-        50, 50);
-    }
-
-    for (var i = 0; i < this.specialBullets.length; i++) {
-      this.ctx.drawImage(this.specialBulletImage,
-        this.specialBullets[i].pos[0] - Game.ZOO_KEEPER_SIZE/2,
-        this.specialBullets[i].pos[1] - Game.ZOO_KEEPER_SIZE/2,
-        150, 150);
+  Game.prototype.drawItem = function(items, size, image, yOffSet) {
+    yOffSet = yOffSet || 0;
+    for (var i = 0; i < items.length; i++) {
+      this.ctx.drawImage(image,
+        items[i].pos[0] - size/2,
+        items[i].pos[1] - size/2,
+        size, size + yOffSet);
     }
   };
 
