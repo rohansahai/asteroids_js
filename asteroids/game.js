@@ -7,39 +7,23 @@
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
     this.intervalTimer = 0;
+    this.frameCount = 0;
+
     this.bullets = [];
     this.specialBullets = [];
     this.treasure = this.addTreasure(1);
 
-    this.image = new Image();
-    this.image.src = 'images/jungle-plant-background.jpg';
-
-		this.shipImage = new Image();
-		this.shipImage.src = 'images/monkey.png';
-
-		this.bulletImage = new Image();
-		this.bulletImage.src = 'images/banana.png';
-
-    this.ammoImage = new Image();
-    this.ammoImage.src = 'images/ammo.png';
-
-    this.specialBulletImage = new Image();
-    this.specialBulletImage.src = 'images/special.jpeg'
-
-		this.asteroidImage = new Image();
-		this.asteroidImage.src = 'images/kanye.png';
+    this.loadMedia();
 
 		this.startTime = new Date
 		this.gameTime = null;
 
     this.lastBulletFired = null;
     this.keys = {};
-    this.frameCount = 0;
+
     this.kills = 0;
 
-    audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'audio/Traitor.mp3');
-    audioElement.play();
+
   }
 
   Game.DIM_X = window.innerWidth - 10;
