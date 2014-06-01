@@ -116,7 +116,7 @@
     this.draw();
     this.isOutOfBounds();
     this.checkCollisions();
-		this.updateTimer();
+		this.updateScreen();
     this.addFieldObjects();
 		this.isWin();
   };
@@ -146,7 +146,7 @@
     this.intervalTimer = window.setInterval(that.step.bind(that), Game.FPS);
   };
 
-	Game.prototype.updateTimer = function (){
+	Game.prototype.updateScreen = function (){
     this.frameCount += 1;
 		this.gameTime = (new Date - this.startTime) / 1000;
 		$('.timer').text("Time: " + this.gameTime);
@@ -262,8 +262,8 @@
   Game.prototype.removeAsteroid = function(i) {
     this.asteroids.splice(i, 1);
   };
-
-  Game.prototype.removeBullet = function(bullet) {
+	
+	Game.prototype.removeBullet = function(bullet) {
     for(var i = this.bullets.length - 1; i >= 0; i--) {
       if (this.bullets[i] == bullet){
         this.bullets.splice(i, 1);

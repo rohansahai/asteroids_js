@@ -8,7 +8,6 @@
   Bullet.inherits(Asteroids.MovingObject);
 
   Bullet.prototype.hitAsteroids = function(game, special) {
-
     for (var i = 0; i < game.asteroids.length; i++) {
       if (this.isCollidedWith(game.asteroids[i])) {
         audioElement = document.createElement('audio');
@@ -16,7 +15,7 @@
         audioElement.play();
         game.removeAsteroid(i);
         game.kills++;
-        if (special !== true){
+        if (!(special === true)){
           game.removeBullet(this);
         }
       }
