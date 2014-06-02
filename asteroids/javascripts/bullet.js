@@ -11,7 +11,7 @@
     for (var i = 0; i < game.asteroids.length; i++) {
       if (this.isCollidedWith(game.asteroids[i])) {
         audioElement = document.createElement('audio');
-        audioElement.setAttribute('src', 'audio/MarioSuperJump.wav');
+        audioElement.setAttribute('src', 'audio/MarioFire.wav');
         audioElement.play();
         game.removeAsteroid(i);
         game.kills++;
