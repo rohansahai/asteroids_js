@@ -1,35 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<link rel="stylesheet" href="asteroids.css" type="text/css" charset="utf-8">
-    <title>Asteroids</title>
+    <link rel="stylesheet" href="landing.css" type="text/css" charset="utf-8">
+    <title>Monkey Madness</title>
 </head>
 <body>
-		<div id="canvas-wrap">
-			<canvas> </canvas>
-			<h1> Baxter vs Kanye </h1>
-			<div class="timer"> Hello </div>
-			<div class="ammo"> Bananas: 0 </div>
-			<div class="kills"> Kanye Slayings: 0 </div>
-		</div>
-
-    <script src="javascripts/jQuery.js"></script>
-
-    <script src="javascripts/moving_object.js"></script>
-    <script src="javascripts/asteroid.js"></script>
-    <script src="javascripts/bullet.js"></script>
-    <script src="javascripts/ship.js"></script>
-    <script src="javascripts/game.js"></script>
-		<script src="javascripts/treasure.js"></script>
-		<script src="javascripts/media.js"></script>
-
-    <script>
-        var canvas = document.getElementsByTagName("canvas")[0];
-				canvas.height = window.innerHeight - 10;
-				canvas.width = window.innerWidth - 10;
-        var ctx = canvas.getContext("2d");
-        new Asteroids.Game(ctx).start();
-    </script>
-
+  <div id="landing-box">
+    <h1>Baxter vs Kanye</h1>
+    <p>
+      Kanye West met Baxter at a bar in 1985. They fell in love but
+      then Kanye realized Baxter was a monkey and got realy pissed off.
+      <br>
+      <br>
+    <a href="asteroids.html">Begin</a>
+  </div>
 </body>
 </html>
