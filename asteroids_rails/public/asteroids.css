@@ -1,0 +1,49 @@
+h1 {
+	position:absolute;
+	left: 40%;
+	font-family: sans-serif;
+	text-align: center;
+	color: #FF9A43;
+}
+
+canvas {
+	padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+	border: solid 5px;
+	/*background: #7F6B4B;*/
+}
+
+#canvas-wrap canvas { position:absolute; top:0; left:0; z-index:0 }
+
+.timer {
+	position:absolute;
+	color: #FF9A43;
+	font-family: sans-serif;
+	font-weight:900;
+	font-size: 24px;
+	top:10px;
+	left:15px;
+}
+
+.ammo {
+	position:absolute;
+	color: #FF9A43;
+	font-family: sans-serif;
+	font-weight:900;
+	font-size: 24px;
+	top:10px;
+	left:170px;
+}
+
+.kills {
+	position:absolute;
+	color: #FF9A43;
+	font-family: sans-serif;
+	font-weight:900;
+	font-size: 24px;
+	top:40px;
+	left:15px;
+}
