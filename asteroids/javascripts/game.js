@@ -3,10 +3,11 @@
 
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
-		var numAsteroids = (window.innerHeight * window.innerWidth)/125000;
-    this.asteroids = this.addAsteroids(numAsteroids); //NUMBER OF ASTEROIDS IN GAME
+		var numAsteroids = (window.innerHeight * window.innerWidth)/110000;
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
+	  this.asteroids = this.addAsteroids(numAsteroids); //NUMBER OF ASTEROIDS IN GAME
+			
     this.intervalTimer = 0;
     this.frameCount = 0;
 
@@ -37,7 +38,7 @@
   Game.prototype.addAsteroids = function(numAsteroids) {
     var asteroids = [];
     for(var i = 0; i < numAsteroids; i++) {
-      asteroids.push(Asteroids.Asteroid.randomAsteroid(Game.DIM_X, Game.DIM_Y));
+      asteroids.push(Asteroids.Asteroid.randomAsteroid(Game.DIM_X, Game.DIM_Y, this.ship));
     }
     return asteroids;
   };

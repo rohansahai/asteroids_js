@@ -11,7 +11,7 @@
   Asteroid.RADIUS = 50;
   Asteroid.COLOR = "purple";
 
-  Asteroid.randomAsteroid = function(dimX, dimY) {
+  Asteroid.randomAsteroid = function(dimX, dimY, ship) {
 		var legitAsteroid = false;
 		while (legitAsteroid != true){
 			legitAsteroid = true;
@@ -27,10 +27,10 @@
 				legitAsteroid = false;
 	    };
 
-			var spawnOffset = Asteroid.RADIUS + 40; //this is the value to offset asteroids away from the ship at the start of the game. Increase the value after the radius to make the game easier (at least at the start)
-
-			if ((x > dimX/2 - spawnOffset && x < dimX/2 + spawnOffset) &&
-			(y > dimY/2 - spawnOffset && y < dimY/2 + spawnOffset)){
+			var spawnOffset = Asteroid.RADIUS + 80; //this is the value to offset asteroids away from the ship at the start of the game. Increase the value after the radius to make the game easier (at least at the start)
+			console.log(ship.pos[0]);
+			if ((x > ship.pos[0] - spawnOffset && x < ship.pos[0] + spawnOffset) &&
+			(y > ship.pos[1] - spawnOffset && y < ship.pos[1] + spawnOffset)){
 				console.log("asteroid genereated too close to ship!");
 				legitAsteroid = false;
 			}
