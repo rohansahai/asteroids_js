@@ -20,9 +20,9 @@
     this.asteroidImage = new Image();
     this.asteroidImage.src = 'images/kanye.png';
 
-    audioElement = document.createElement('audio');
-    audioElement.setAttribute('src', 'audio/Traitor.mp3');
-    audioElement.play();
+    this.audioElement = document.createElement('audio');
+    this.audioElement.setAttribute('src', 'audio/Traitor.mp3');
+    this.audioElement.play();
   };
 
 })(this);

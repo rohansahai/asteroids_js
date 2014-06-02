@@ -158,7 +158,8 @@
     //check if the ship has collided with the any asteroids
     for(var i = 0; i < this.asteroids.length; i++) {
       if (this.asteroids[i].isCollidedWith(this.ship)) {
-        alert("You're going back to zoo little monkey!!");
+ 				this.audioElement.pause();
+			  alert("You're going back to zoo little monkey!!");
         this.stop();
       }
     }
