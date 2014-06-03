@@ -18,7 +18,7 @@
     this.specialBulletImage.src = 'images/special.jpeg'
 
     this.asteroidImage = new Image();
-    this.asteroidImage.src = 'images/kanye.png';
+    this.asteroidImage.src = 'images/zookeeper.png';
 
     this.audioElement = document.createElement('audio');
     this.audioElement.setAttribute('src', 'audio/Traitor.mp3');
