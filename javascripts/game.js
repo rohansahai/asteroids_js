@@ -56,19 +56,20 @@
     ctx.drawImage(this.backgroundImage, 0, 0, Game.DIM_X, Game.DIM_Y);
     this.ship.draw(this);
 
-    this.drawItem(this.asteroids, Game.ASTEROID_SIZE, this.asteroidImage, 5);
+    this.drawItem(this.asteroids, Game.ASTEROID_SIZE, this.asteroidImage, 20, 20);
     this.drawItem(this.bullets, Game.BANANA_SIZE, this.bulletImage);
     this.drawItem(this.treasure, 50, this.ammoImage);
     this.drawItem(this.specialBullets, 150, this.specialBulletImage);
   };
 
-  Game.prototype.drawItem = function(items, size, image, yOffSet) {
+  Game.prototype.drawItem = function(items, size, image, xOffSet, yOffSet) {
     yOffSet = yOffSet || 0;
+		xOffSet = xOffSet || 0;
     for (var i = 0; i < items.length; i++) {
       this.ctx.drawImage(image,
         items[i].pos[0] - size/2,
         items[i].pos[1] - size/2,
-        size, size + yOffSet);
+        size + xOffSet, size + yOffSet);
     }
   };
 
@@ -153,7 +154,7 @@
 		this.gameTime = (new Date - this.startTime) / 1000;
 		$('.timer').text("Time: " + this.gameTime);
     $(".ammo").html("Bananas: " + this.ship.ammo);
-    $(".kills").html("Kanye Slayings: " + this.kills);
+    $(".kills").html("Zookeepers Bananafied: " + this.kills);
 	};
 
   Game.prototype.checkCollisions = function() {
