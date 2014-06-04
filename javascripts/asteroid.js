@@ -27,7 +27,7 @@
 				legitAsteroid = false;
 	    };
 
-			var spawnOffset = Asteroid.RADIUS + 80; //this is the value to offset asteroids away from the ship at the start of the game. Increase the value after the radius to make the game easier (at least at the start)
+			var spawnOffset = Asteroid.RADIUS + 160; //this is the value to offset asteroids away from the ship at the start of the game. Increase the value after the radius to make the game easier (at least at the start)
 			console.log(ship.pos[0]);
 			if ((x > ship.pos[0] - spawnOffset && x < ship.pos[0] + spawnOffset) &&
 			(y > ship.pos[1] - spawnOffset && y < ship.pos[1] + spawnOffset)){
