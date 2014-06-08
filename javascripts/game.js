@@ -94,16 +94,16 @@
   };
 
   Game.prototype.checkHeldKeys = function () {
-    if (this.keys[73]){
+    if (this.keys[38]){
       this.ship.power([1,-1]);
     }
-    if (this.keys[74]){
+    if (this.keys[37]){
       this.ship.rotate("left");
     }
-    if (this.keys[75]){
+    if (this.keys[40]){
       this.ship.power([-1,1]);
     }
-    if (this.keys[76]){
+    if (this.keys[39]){
       this.ship.rotate("right");
     }
     if (this.keys[32]){
