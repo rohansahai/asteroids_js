@@ -164,6 +164,10 @@
  				this.audioElement.pause();
 			  alert("You're going back to zoo little monkey!!");
         this.stop();
+				//restart game
+				this.ctx.clearRect(0,0,Game.DIM_X,Game.DIM_Y);
+				//this.start();
+				new Asteroids.Game(this.ctx).start();
       }
     }
     //check if the ship has picked up any ammo
