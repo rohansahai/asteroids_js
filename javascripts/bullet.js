@@ -27,9 +27,5 @@
     this.pos[1] += this.vel[1];
     this.hitAsteroids(game, special);
   };
-  //
-  // Bullet.randomFloatingBullet = function(dimX, dimY) {
-  //   return new Bullet([300,300], [0,0], 5);
-  // }
 
 })(this);

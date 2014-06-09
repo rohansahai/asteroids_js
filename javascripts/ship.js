@@ -54,10 +54,13 @@
   Ship.prototype.fireBullet = function(radius, speedFactor) {
     radius = radius || 5;
     speedFactor = speedFactor || 20;
-
-    var xVel = this.vel[0]/Math.abs(this.vel[0]) * Math.sin(Ship.degreesToRadians(this.rotation));
-    var yVel = this.vel[1]/Math.abs(this.vel[1]) * Math.cos(Ship.degreesToRadians(this.rotation));
+		console.log([this.vel[0], this.vel[1]]);
+		var shipVelY = this.vel[0] < 0 ? this.vel[1]*-1 : this.vel[1];
+		var shipVelX = Math.abs(this.vel[0]);
+    var xVel = shipVelX/Math.abs(shipVelX) * Math.sin(Ship.degreesToRadians(this.rotation));
+    var yVel = shipVelY/Math.abs(shipVelY) * Math.cos(Ship.degreesToRadians(this.rotation));
     var speed = Math.sqrt(Math.pow(xVel,2) + Math.pow(yVel, 2));
+
 
     if (this.vel[0] !== 0 && this.vel[1] !== 0) {
       return (new Asteroids.Bullet(
