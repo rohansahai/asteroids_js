@@ -4,7 +4,7 @@
   var Game = Asteroids.Game = function(ctx) {
     this.ctx = ctx;
 		//number of asteroids determined by window size
-		var numAsteroids = (window.innerHeight * window.innerWidth)/110000;
+		var numAsteroids = (window.innerHeight * window.innerWidth)/150000; //110000 HARD, 60
     this.ship = new Asteroids.Ship([Game.DIM_X/2, Game.DIM_Y/2],
       [0, 0], Asteroids.Ship.RADIUS, Asteroids.Ship.COLOR);
 	  this.asteroids = this.addAsteroids(numAsteroids); //NUMBER OF ASTEROIDS IN GAME
@@ -123,6 +123,8 @@
 		this.updateScreen();
     this.addFieldObjects();
 		this.isWin();
+    var that = this;
+    //this.intervalTimer = window.requestAnimationFrame(that.step.bind(that));
   };
 
   Game.prototype.addFieldObjects = function() {
@@ -148,6 +150,8 @@
     // window.setInterval returns a number (ID) representing the timer
     // we use this later to clear the interval (stop the game/ timer)
     this.intervalTimer = window.setInterval(that.step.bind(that), Game.FPS);
+    
+    //this.intervalTimer = window.requestAnimationFrame(that.step.bind(that));
   };
 
 	Game.prototype.updateScreen = function (){
@@ -188,6 +192,7 @@
 	};
 
   Game.prototype.stop = function() {
+    //window.cancelAnimationFrame(this.intervalTimer);
     clearInterval(this.intervalTimer);
   };
 
